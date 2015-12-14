@@ -64,7 +64,7 @@ def bruteforce(target,passlist,username):
             print colored("==========================[LOGIN FOUND]==========================", 'yellow', attrs=['bold'])
             print ""
             print colored("===================================================================", 'yellow', attrs=['bold'])
-            print colored("                 [  :: USER[%s] AND PASS[%s]  ]                    ", 'yellow', attrs=['bold']) % (username, password)
+            print colored("               [  :: USER[%s] AND PASS[%s]  ]                      ", 'green', attrs=['bold']) % (username, password)
             print colored("===================================================================", 'yellow', attrs=['bold'])
 
             sys.exit()
