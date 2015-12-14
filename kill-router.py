@@ -61,7 +61,7 @@ def bruteforce(target,passlist,username):
         print  colored('[%s]         USER[%s]          PASS [%s]', 'yellow') % (i,username,password)
         if code == 200:
             print ""
-            print colored("==========================[LOGIN FOUNDED]==========================", 'yellow', attrs=['bold'])
+            print colored("==========================[LOGIN FOUND]==========================", 'yellow', attrs=['bold'])
             print ""
             print colored("===================================================================", 'yellow', attrs=['bold'])
             print colored("                 [  :: USER[%s] AND PASS[%s]  ]                    ", 'yellow', attrs=['bold']) % (username, password)
