@@ -36,7 +36,7 @@ def usage():
    ░ ░░ ░  ▒ ░  ░ ░     ░ ░        ░░   ░ ░ ░ ░ ▒   ░░░ ░ ░   ░         ░     ░░   ░
    ░  ░    ░      ░  ░    ░  ░      ░         ░ ░     ░                 ░  ░   ░
 
-
+								v0.1
     """, 'red', attrs=['bold'])
     print colored("[*] By: Matheus Fidelis aka D0ctor", 'red', attrs=['bold'])
     print colored("[!] Usage: ./kill-router.py -t [TARGET IP] -u [USER TO TEST] -p [PATH TO PASSLIST]", 'red', attrs=['bold'])
