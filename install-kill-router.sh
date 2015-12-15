@@ -1,9 +1,19 @@
 #!/bin/bash
+
+#VALIDA SE O USUÁRIO É ROOT OU SUDO
+if [[ $EUID -ne 0 ]]; then
+	echo -e "ESTE SCRIPT DEVE SER EXECUTADO COM PERMISSÕES DE ROOT \n"
+
+exit 1
+fi
+
 echo "INSTALANDO AS DEPENDENCIAS"
-sudo apt-get install -y pip python 
+extras/get-pip.py  
 
 echo "INSTALANDO AS DEPENDENCIAS DO PIP"
-pip install termcolor
-pip install argparse
-pip install sys
-pip install requests
+
+chmod 777 extras/get-pip.py
+extras/get-pip.py termcolor
+extras/get-pip.py argparse
+extras/get-pip.py sys
+extras/get-pip.py requests
