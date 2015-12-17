@@ -62,9 +62,6 @@ def bruteforce(target,passlist,username):
 
 
 def main():
-    global target
-    global passlist
-    global username
 
     target = ''
     passlist = ''
