@@ -14,6 +14,4 @@ echo "INSTALANDO AS DEPENDENCIAS DO PIP"
 
 chmod 777 extras/get-pip.py
 extras/get-pip.py termcolor
-extras/get-pip.py argparse
-extras/get-pip.py sys
 extras/get-pip.py requests
