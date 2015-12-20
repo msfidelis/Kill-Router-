@@ -26,3 +26,16 @@ Método de uso:
 [!] Usage: ./kill-router.py -t [TARGET IP] -u [USER TO TEST] -p [PATH TO PASSLIST]  
 [!] Usage: ./kill-router.py -t 192.168.0.1 -u admin -p passlist.txt  
 ```
+
+```
+Especificando uma porta para o ataque:
+[!] Usage: ./kill-router.py -t [TARGET IP] -p [TARGET PORT] -u [USER TO TEST] -l [PATH TO PASSLIST]
+[!] Usage: ./kill-router.py -t 192.168.0.1 -p 8080 -u admin -l passlist.txt
+```
+
+
+```
+Utilizando ataques em URLs com SSL 
+[!] Usage: ./kill-router.py -t [TARGET IP] -p [TARGET PORT] -u [USER TO TEST] -l [PATH TO PASSLIST] -m [PROTOCOL]
+[!] Usage: [!] ./kill-router.py -t 192.168.0.1 -p 8080 -u admin -l passlist.txt -m https", 'red'
+```
