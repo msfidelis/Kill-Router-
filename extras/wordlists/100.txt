@@ -3,6 +3,7 @@
 123456789
 admin
 Admin
+guest
 root
 toor
 administrator
