@@ -39,3 +39,13 @@ Utilizando ataques em URLs com SSL
 [!] Usage: ./kill-router.py -t [TARGET IP] -p [TARGET PORT] -u [USER TO TEST] -l [PATH TO PASSLIST] -m [PROTOCOL]
 [!] Usage: [!] ./kill-router.py -t 192.168.0.1 -p 8080 -u admin -l passlist.txt -m https", 'red'
 ```
+
+```
+Fazendo buscas no Shodan com a API 
+[!] Usage: ./kill-router.py -s [DORK]
+[!] Usage: [!] ./kill-router.py -S Apache2
+```
+
+# Tutoriais
+* Uso e Instalação do Kill Router: http://www.nanoshots.com.br/2015/12/kill-router-brute-force-em-senhas-de.html
+* Uso e configuração do Shodan Search: http://www.nanoshots.com.br/2016/06/kill-router-10-brute-force-em-massa-em.html
