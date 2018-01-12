@@ -22,6 +22,10 @@ def main():
     if args.shodan != None:
         kill_router.shodan_search(args)
     else:
+
+        if args.method is None:
+            args.method = "http"
+
         kill_router.bruteforce(args.target, args.port, args.method, args.passlist, args.username)
 
     # try:

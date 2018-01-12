@@ -8,6 +8,7 @@ from termcolor import colored
 class Shodan_Search(object):
 
     def __init__(self):
+
         self._api_key = os.environ.get("SHODAN_API")
         self._api = shodan.Shodan(self._api_key)
 

@@ -22,8 +22,6 @@ class Passlist(object):
         if self._passlist is None:
             self.select_default_lists()
 
-        print self._passlist
-
         fd = open(self._passlist, 'rw')
         passwordList = fd.readlines()
         passwords = Queue.Queue()

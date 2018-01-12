@@ -27,9 +27,6 @@ class CLI(object):
         if args.username is None:
             username = "admin"
 
-        if args.method is None:
-            args.method = "http"
-
         if args.method == "http" and args.port is None:
             args.port = 80
 

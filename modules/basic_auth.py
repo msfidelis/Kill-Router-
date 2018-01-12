@@ -20,7 +20,7 @@ class Basic_Auth(object):
                 validation = requests.get('https://' + url, verify=False, timeout=5)
 
                 if validation.status_code == 200:
-                    print colored("[X] INVALID TEST ", 'red', attrs=['bold'])
+                    print colored("[X] UNABLE TO CONNECT ", 'red', attrs=['bold'])
                     return False
                 else:
                     return True
@@ -29,7 +29,7 @@ class Basic_Auth(object):
                 validation = requests.get('http://' + url, timeout=5)
 
                 if validation.status_code == 200:
-                    print colored("[X] INVALID TEST ", 'red', attrs=['bold'])
+                    print colored("[X] UNABLE TO CONNECT ", 'red', attrs=['bold'])
                     return False
                 else:
                     return True

