@@ -16,3 +16,4 @@ chmod 777 extras/get-pip.py
 extras/get-pip.py termcolor
 extras/get-pip.py requests
 extras/get-pip.py shodan
+extras/get-pip.py python-dotenv

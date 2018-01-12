@@ -6,5 +6,11 @@ class FTP(object):
     def __init__(self):
         pass
 
-    def test(self):
+    def validate(self):
+        pass
+
+    def attack(self):
+        pass
+
+    def brute_force(self):
         pass

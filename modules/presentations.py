@@ -22,7 +22,7 @@ class Presentations(object):
            ░ ░░ ░  ▒ ░  ░ ░     ░ ░        ░░   ░ ░ ░ ░ ▒   ░░░ ░ ░   ░         ░     ░░   ░
            ░  ░    ░      ░  ░    ░  ░      ░         ░ ░     ░                 ░  ░   ░
 
-        								v1.0
+        								v2.0
             """, 'red', attrs=['bold'])
 
     @staticmethod
