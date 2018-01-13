@@ -25,7 +25,7 @@ class CLI(object):
 
         # Default Values
         if args.username is None:
-            username = "admin"
+            args.username = "admin"
 
         if args.method == "http" and args.port is None:
             args.port = 80
