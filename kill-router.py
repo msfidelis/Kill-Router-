@@ -19,7 +19,7 @@ CURR_PATH = path.dirname(path.realpath(__file__))
 logfile = CURR_PATH+"/results.csv"
 
 # INSERT YOUR API KEY
-SHODAN_API_KEY = "BKf6OUqvUM0QCyLf3fa2Hu5iz6sFXYCT"
+SHODAN_API_KEY = ""
 api = shodan.Shodan(SHODAN_API_KEY)
 
 __AUTOR__   =   'Matheus Fidelis'
